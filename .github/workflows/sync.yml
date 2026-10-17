@@ -13,7 +13,7 @@ jobs:
     steps:
       - run: |
           RUN=$(gh run list -R revenge-mod/revenge-bundle-next -w build.yml -b main -s success -L 1 --json databaseId -q '.[0].databaseId')
-          gh run download $RUN -R revenge-mod/revenge-bundle-next -D out
+          gh run download $RUN -R revenge-mod/revenge-bundle-next -n revenge-bundle -D out
           f=$(find out -name revenge.bundle | head -1)
           gh release delete latest -y --cleanup-tag -R ${{ github.repository }} || true
           gh release create latest "$f" -R ${{ github.repository }} -t latest -n "run $RUN"
